@@ -3,22 +3,39 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int X = scanner.nextInt();
-        if (X == 1){
-            System.out.println("1/1");
+        int M = scanner.nextInt();
+        int N = scanner.nextInt();
+        int min = -1;
+        int sum = 0;
+
+        if (N < 2){
+            System.out.println(-1);
             return;
         }
-        int k = 2;
-        while ((k * (k + 1)) / 2 < X){
-            k++;
-        }
-        int prev = (k-1) * k / 2;
-        int pos = X - prev;
 
-        if (k % 2 != 0){
-            System.out.printf("%d/%d", (k + 1 - pos), pos);
+        for (int i = M; i <= N; i++) {
+            if (i < 2){
+                continue;
+            }
+            boolean sosu = true;
+            for (int j = 2; j <= i - 1; j++) {
+                if (i % j == 0){
+                    sosu = false;
+                    break;
+                }
+            }
+            if (sosu){
+                sum += i;
+                if (min == -1){
+                    min = i;
+                }
+            }
+        }
+        if (min == -1){
+            System.out.println(min);
         } else {
-            System.out.printf("%d/%d",pos, (k + 1 - pos));
+            System.out.println(sum);
+            System.out.println(min);
         }
     }
 }
